@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stress Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <h1> Stress Predicition</h1>
+    <div class="container">
+        <h2>Stress Prediction</h2>
+        <form action="/result" method="POST">
+            <label for="HR">Heart Rate</label>
+            <input type="number" id="HR" name="HR">
+            <br><br>
+             <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+            <h3 class="result">{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>

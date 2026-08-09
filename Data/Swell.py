@@ -87,6 +87,10 @@ dt_clf_gini.fit(X_train, y_train)
 y_pred = dt_clf_gini.predict(X_test)
 print ("Accuracy:", accuracy_score(y_test, y_pred))
 
+#save the model
+with open ("Swell.pkl", "wb") as model_file:
+    pickle.dump(dt_clf_gini, model_file)
+
 #how much data is being used for training and how much for testing 
 #print (X_train.shape, X_test.shape)
 
