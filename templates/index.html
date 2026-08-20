@@ -13,12 +13,34 @@
             <label for="HR">Heart Rate</label>
             <input type="number" id="HR" name="HR">
             <br><br>
+            <label for="BVP">BVP</label>
+            <input type="number" id="BVP" name="BVP">
+            <br><br>
+            <label for="ECG">ECG</label>
+            <input type="number" id='ECG' name="ECG">
+            <br><br>           
              <input type="submit" value="Predict">
         </form>
-
-        {% if prediction_text %}
-            <h3 class="result">{{ prediction_text }}</h3>
+    
+        {% if HR_answer is defined %}
+            <h2>Results</h2>
+            
+        
+            {% if total_score >0 %}
+                <h3> Are you feeling okay? </h3> <br> <h4> </h4>The results indicate you may be feeling a little stressed. <br> <br>
+                    You could benefit from taking a look at the following resources: <br> <br>
+                    <a href ="https://www.nhs.uk/every-mind-matters/mental-health-issues/stress/"> NHS Every Mind Matters </a> </h4> <br> <br> <br> 
+                    
+                   <h3> Or maybe you just want to talk to someone? </h3> <br> <br>
+                    <h4>Try talking to a friend or family member, or consider the following resource: <br> <br>
+                    <a href = "https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/stress/"> NHS Mental Health Resources</a>
+                </h4>
+            {% else %}
+                <h3> Everything seems to be okay from your readings. <br> But if you feel something isnt quite right, consider reaching out to a friend or family member</h3>
         {% endif %}
+
+    {% endif %}
+        
     </div>
 </body>
 </html>
