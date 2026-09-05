@@ -11,7 +11,12 @@ MQTT_USERNAME = "MMATTO"
 MQTT_PASSWORD = "MQTTpassword"
 MQTT_TOPIC = "stress/readings"
 
-
+#Get the readings
+latest_data = {
+    "HR": None,
+    "BVP": None,
+    "ECG": None
+}
 
 #auto connects to the client
 def on_connect(client, userdata, flags, rc):
@@ -21,7 +26,7 @@ def on_connect(client, userdata, flags, rc):
     else:
         print("Not able to connect to the MQTT")
 
-def on_message (userdata, flags, msg):
+def on_message (client, userdata, msg):
     try: #convert to json what it receives from the MQTT
         data = json.loads(msg.payload.decode())
 
@@ -31,6 +36,11 @@ def on_message (userdata, flags, msg):
         ECG = float (data["ECG"])
     except Exception as e:
         print("There is an error with receiving the data from the MQTT", e)
+
+        print("HR:", HR)
+        print("BVP:", BVP)
+        print("ECG:", ECG)
+
 
 mqtt_client = mqtt.Client()
 
@@ -48,10 +58,11 @@ mqtt_client.on_connect = on_connect
 mqtt_client.on_message = on_message
 
 #60 for every 60 seconds to make the connection
-mqtt_client.connect(
-    MQTT_BROKER,
-    MQTT_PORT,
-    60
+if __name__ == "__main__":
+    mqtt_client.connect(
+        MQTT_BROKER,
+        MQTT_PORT,
+        60
 )
 #keeps the mqtt client running so that it does not stop
-mqtt_client.loop_forever()
+    mqtt_client.loop_forever()

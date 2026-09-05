@@ -8,19 +8,7 @@
 </head>
 
 <body>    
-    <div class="container">        
-        <form action="/result" method="POST">
-            <a href="{{ url_for('input') }}">Input Readings Yourself</a>
-            <h1> Stress Prediction</h1>
-            <label for="HR">Heart Rate</label>
-            <input type="number" id="HR" name="HR">
-            <br><br>
-            <label for="BVP">BVP</label>
-            <input type="number" id="BVP" name="BVP">
-            <br><br>      
-             <input type="submit" value="Predict">
-        </form>
-    
+    <div class="container">      
         {% if HR_answer is defined %}
             <h2>Results</h2>
             
@@ -44,5 +32,3 @@
     {% endif %}
         
     </div>
-</body>
-</html>
