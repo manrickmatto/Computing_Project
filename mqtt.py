@@ -15,7 +15,7 @@ MQTT_TOPIC = "stress/readings"
 latest_data = {
     "HR": None,
     "BVP": None,
-    "ECG": None
+    #"ECG": None
 }
 
 #auto connects to the client
@@ -33,13 +33,13 @@ def on_message (client, userdata, msg):
 
         HR = float(data["HR"])
         BVP = float (data["BVP"])
-        ECG = float (data["ECG"])
+        #ECG = float (data["ECG"])
     except Exception as e:
         print("There is an error with receiving the data from the MQTT", e)
 
         print("HR:", HR)
         print("BVP:", BVP)
-        print("ECG:", ECG)
+       # print("ECG:", ECG)
 
 
 mqtt_client = mqtt.Client()
