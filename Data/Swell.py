@@ -40,8 +40,14 @@ df.dropna(axis =0, how = 'any', subset= None, inplace=True)
 df = df[(df.HR != 999)]
 
 
-#Create new column 'Stressed' with the condition of assigning binary to condition
-df['Stressed'] = [0 if x == 'R' else 1 for x in df['Condition']]
+#Create new column 'Stressed' with the condition of assigning binary to each emotional condition. 1 is baseline, 2 is stress, 4 is relaxed
+df['Stressed'] = [
+    1 if x == 'N'
+    else 2 if x in ('I','T')
+    else 4 if x == 'R' 
+    else None
+    for x in df['Condition']]
+
 
 print (df)
 
