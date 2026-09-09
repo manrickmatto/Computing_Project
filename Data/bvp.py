@@ -39,8 +39,8 @@ df1 = df1[df1 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df1)
 
-#remove unneeded data label 4
-rows = df1[df1["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df1[df1["emotion_label"] == 0].index
 df1.drop(rows, inplace=True)
 #print(df1)
 
@@ -97,8 +97,8 @@ df2 = df2[df2 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df2)
 
-#remove unneeded data label 4
-rows = df2[df2["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df2[df2["emotion_label"] == 0].index
 df2.drop(rows, inplace=True)
 #print(df2)
 
@@ -155,8 +155,8 @@ df3 = df3[df3 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df3)
 
-#remove unneeded data label 4
-rows = df3[df3["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df3[df3["emotion_label"] == 0].index
 df3.drop(rows, inplace=True)
 #print(df3)
 
@@ -213,8 +213,8 @@ df15 = df15[df15 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df15)
 
-#remove unneeded data label 4
-rows = df15[df15["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df15[df15["emotion_label"] == 0].index
 df15.drop(rows, inplace=True)
 #print(df15)
 
@@ -271,8 +271,8 @@ df4 = df4[df4 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df4)
 
-#remove unneeded data label 4
-rows = df4[df4["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df4[df4["emotion_label"] == 0].index
 df4.drop(rows, inplace=True)
 #print(df4)
 
@@ -329,8 +329,8 @@ df5 = df5[df5 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df4)
 
-#remove unneeded data label 4
-rows = df5[df5["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df5[df5["emotion_label"] == 0].index
 df5.drop(rows, inplace=True)
 #print(df5)
 
@@ -387,8 +387,8 @@ df6 = df6[df6 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df6)
 
-#remove unneeded data label 4
-rows = df6[df6["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df6[df6["emotion_label"] == 0].index
 df6.drop(rows, inplace=True)
 #print(df5)
 
@@ -445,8 +445,8 @@ df7 = df7[df7 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df7)
 
-#remove unneeded data label 4
-rows = df7[df7["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df7[df7["emotion_label"] == 0].index
 df7.drop(rows, inplace=True)
 #print(df7)
 
@@ -503,8 +503,8 @@ df8 = df8[df8 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df8)
 
-#remove unneeded data label 4
-rows = df8[df8["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df8[df8["emotion_label"] == 0].index
 df8.drop(rows, inplace=True)
 #print(df8)
 
@@ -561,8 +561,8 @@ df9 = df9[df9 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df9)
 
-#remove unneeded data label 4
-rows = df9[df9["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df9[df9["emotion_label"] == 0].index
 df9.drop(rows, inplace=True)
 #print(df9)
 
@@ -619,8 +619,8 @@ df10 = df10[df10 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df10)
 
-#remove unneeded data label 4
-rows = df10[df10["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df10[df10["emotion_label"] == 0].index
 df10.drop(rows, inplace=True)
 #print(df10)
 
@@ -677,8 +677,8 @@ df11 = df11[df11 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df11)
 
-#remove unneeded data label 4
-rows = df11[df11["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df11[df11["emotion_label"] == 0].index
 df11.drop(rows, inplace=True)
 #print(df11)
 
@@ -735,8 +735,8 @@ df12 = df12[df12 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df12)
 
-#remove unneeded data label 4
-rows = df12[df12["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df12[df12["emotion_label"] == 0].index
 df12.drop(rows, inplace=True)
 #print(df12)
 
@@ -793,8 +793,8 @@ df13 = df13[df13 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df13)
 
-#remove unneeded data label 4
-rows = df13[df13["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df13[df13["emotion_label"] == 0].index
 df13.drop(rows, inplace=True)
 #print(df13)
 
@@ -851,8 +851,8 @@ df14 = df14[df14 >=0].dropna()
 #print("DataFrame after dropping negative values:")
 #print(df14)
 
-#remove unneeded data label 4
-rows = df14[df14["emotion_label"] == 4].index
+#remove unneeded data label 0
+rows = df14[df14["emotion_label"] == 0].index
 df14.drop(rows, inplace=True)
 #print(df14)
 

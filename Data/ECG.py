@@ -2,8 +2,15 @@ import pickle
 import numpy as np
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.model_selection import train_test_split, StratifiedKFold
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report, confusion_matrix, roc_auc_score, mean_squared_error, r2_score
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
+import seaborn as sns
+import xgboost as xgb
+import matplotlib.pyplot as plt
+import lightgbm as lgb
+
 
 #s2 pkl file
 file_path = r"C:\Users\m45m4\Documents\Computing project\WESAD\WESAD\S2\S2.pkl"
@@ -41,11 +48,6 @@ df1 = df1[df1 >=0].dropna()
 
 #remove unneeded data label 0
 rows = df1[df1["emotion_label"] == 0].index
-df1.drop(rows, inplace=True)
-#print(df)
-
-#remove unneeded data label 4
-rows = df1[df1["emotion_label"] == 4].index
 df1.drop(rows, inplace=True)
 #print(df)
 
@@ -111,10 +113,6 @@ rows = df3[df3["emotion_label"] == 0].index
 df3.drop(rows, inplace=True)
 #print(df)
 
-#remove unneeded data label 4
-rows = df3[df3["emotion_label"] == 4].index
-df3.drop(rows, inplace=True)
-#print(df)
 
 #remove unneeded data label 5
 rows = df3[df3["emotion_label"] == 5].index
@@ -178,11 +176,6 @@ rows = df4[df4["emotion_label"] == 0].index
 df4.drop(rows, inplace=True)
 #print(df4)
 
-#remove unneeded data label 4
-rows = df4[df4["emotion_label"] == 4].index
-df4.drop(rows, inplace=True)
-#print(df)
-
 #remove unneeded data label 5
 rows = df4[df4["emotion_label"] == 5].index
 df4.drop(rows, inplace=True)
@@ -242,11 +235,6 @@ df5 = df5[df5 >=0].dropna()
 
 #remove unneeded data label 0
 rows = df5[df5["emotion_label"] == 0].index
-df5.drop(rows, inplace=True)
-#print(df)
-
-#remove unneeded data label 4
-rows = df5[df5["emotion_label"] == 4].index
 df5.drop(rows, inplace=True)
 #print(df)
 
@@ -313,11 +301,6 @@ rows = df6[df6["emotion_label"] == 0].index
 df6.drop(rows, inplace=True)
 #print(df6)
 
-#remove unneeded data label 4
-rows = df6[df6["emotion_label"] == 4].index
-df6.drop(rows, inplace=True)
-#print(df6)
-
 #remove unneeded data label 5
 rows = df6[df6["emotion_label"] == 5].index
 df6.drop(rows, inplace=True)
@@ -377,11 +360,6 @@ df7 = df7[df7 >=0].dropna()
 
 #remove unneeded data label 0
 rows = df7[df7["emotion_label"] == 0].index
-df7.drop(rows, inplace=True)
-#print(df7)
-
-#remove unneeded data label 4
-rows = df7[df7["emotion_label"] == 4].index
 df7.drop(rows, inplace=True)
 #print(df7)
 
@@ -446,11 +424,6 @@ rows = df8[df8["emotion_label"] == 0].index
 df8.drop(rows, inplace=True)
 #print(df)
 
-#remove unneeded data label 4
-rows = df8[df8["emotion_label"] == 4].index
-df8.drop(rows, inplace=True)
-#print(df)
-
 #remove unneeded data label 5
 rows = df8[df8["emotion_label"] == 5].index
 df8.drop(rows, inplace=True)
@@ -509,11 +482,6 @@ df9 = df9[df9 >=0].dropna()
 
 #remove unneeded data label 0
 rows = df9[df9["emotion_label"] == 0].index
-df9.drop(rows, inplace=True)
-#print(df9)
-
-#remove unneeded data label 4
-rows = df9[df9["emotion_label"] == 4].index
 df9.drop(rows, inplace=True)
 #print(df9)
 
@@ -579,11 +547,6 @@ rows = df10[df10["emotion_label"] == 0].index
 df10.drop(rows, inplace=True)
 #print(df)
 
-#remove unneeded data label 4
-rows = df10[df10["emotion_label"] == 4].index
-df10.drop(rows, inplace=True)
-#print(df)
-
 #remove unneeded data label 5
 rows = df10[df10["emotion_label"] == 5].index
 df10.drop(rows, inplace=True)
@@ -643,11 +606,6 @@ df11 = df11[df11 >=0].dropna()
 
 #remove unneeded data label 0
 rows = df11[df11["emotion_label"] == 0].index
-df11.drop(rows, inplace=True)
-#print(df11)
-
-#remove unneeded data label 4
-rows = df11[df11["emotion_label"] == 4].index
 df11.drop(rows, inplace=True)
 #print(df11)
 
@@ -713,11 +671,6 @@ rows = df13[df13["emotion_label"] == 0].index
 df13.drop(rows, inplace=True)
 #print(df13)
 
-#remove unneeded data label 4
-rows = df13[df13["emotion_label"] == 4].index
-df13.drop(rows, inplace=True)
-#print(df13)
-
 #remove unneeded data label 5
 rows = df13[df13["emotion_label"] == 5].index
 df13.drop(rows, inplace=True)
@@ -779,11 +732,6 @@ df14 = df14[df14 >=0].dropna()
 rows = df14[df14["emotion_label"] == 0].index
 df14.drop(rows, inplace=True)
 #print(df14)
-
-#remove unneeded data label 4
-rows = df14[df14["emotion_label"] == 4].index
-df14.drop(rows, inplace=True)
-#print(df)
 
 #remove unneeded data label 5
 rows = df14[df14["emotion_label"] == 5].index
@@ -847,11 +795,6 @@ rows = df15[df15["emotion_label"] == 0].index
 df15.drop(rows, inplace=True)
 #print(df)
 
-#remove unneeded data label 4
-rows = df15[df15["emotion_label"] == 4].index
-df15.drop(rows, inplace=True)
-#print(df15)
-
 #remove unneeded data label 5
 rows = df15[df15["emotion_label"] == 5].index
 df15.drop(rows, inplace=True)
@@ -911,11 +854,6 @@ df16 = df16[df16 >=0].dropna()
 
 #remove unneeded data label 0
 rows = df16[df16["emotion_label"] == 0].index
-df16.drop(rows, inplace=True)
-#print(df16)
-
-#remove unneeded data label 4
-rows = df16[df16["emotion_label"] == 4].index
 df16.drop(rows, inplace=True)
 #print(df16)
 
@@ -981,11 +919,6 @@ rows = df17[df17["emotion_label"] == 0].index
 df17.drop(rows, inplace=True)
 #print(df17)
 
-#remove unneeded data label 4
-rows = df17[df17["emotion_label"] == 4].index
-df17.drop(rows, inplace=True)
-#print(df17)
-
 #remove unneeded data label 5
 rows = df17[df17["emotion_label"] == 5].index
 df17.drop(rows, inplace=True)
@@ -1020,29 +953,158 @@ x = df[['ecg']]
 y = df["emotion_label"]
 
 #Train test split
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+X_train,X_test,y_train,y_test=train_test_split(x,y,test_size=0.2,stratify=y,random_state=42)
 
-#traning the model
-dt_clf_gini = DecisionTreeClassifier(criterion="gini", random_state=100, max_depth=5, min_samples_leaf=5)
-dt_clf_gini.fit(X_train, y_train)
+encoder = LabelEncoder()
+y_encoded = encoder.fit_transform(y)
+
+#traning the model decision tree classifier
+#dt_clf_gini = DecisionTreeClassifier(criterion="gini", random_state=100, max_depth=5, min_samples_leaf=5)
+#dt_clf_gini.fit(X_train, y_train)
 
 #evaluate model performance
-y_pred = dt_clf_gini.predict(X_test)
-print (f"Accuracy:", accuracy_score(y_test, y_pred))
-print('Accuracy2: %.3f' % accuracy_score(y_test, y_pred))
+#y_pred = dt_clf_gini.predict(X_test)
+#print (f"Accuracy:", accuracy_score(y_test, y_pred))
+#print('Accuracy2: %.3f' % accuracy_score(y_test, y_pred))
 
 #average=weighted means to combine precision values from multiple classes
-precision = precision_score(y_test, y_pred, average='weighted', zero_division=0)
-print(f"Precision: {precision}")
-print('Precision2: %.3f' % precision_score(y_test, y_pred, average='weighted', zero_division=0))
+#precision = precision_score(y_test, y_pred, average='weighted', zero_division=0)
+#print(f"Precision: {precision}")
+#print('Precision2: %.3f' % precision_score(y_test, y_pred, average='weighted', zero_division=0))
 
-recall = recall_score(y_test, y_pred, average='weighted', zero_division=0)
-print(f"Recall: {recall}")
-print('Recall2: %.3f' % recall_score(y_test, y_pred, average='weighted', zero_division=0))
+
+#recall = recall_score(y_test, y_pred, average='weighted', zero_division=0)
+#print(f"Recall: {recall}")
+#print('Recall2: %.3f' % recall_score(y_test, y_pred, average='weighted', zero_division=0))
 
 #F1 Score
-print('F1 Score: %.3f' % f1_score(y_test, y_pred, average='weighted', zero_division=0))
+#print('F1 Score: %.3f' % f1_score(y_test, y_pred, average='weighted', zero_division=0))
 
+#random forest regression
+rf_classifier = RandomForestClassifier(n_estimators=35, max_depth=20, min_samples_leaf=2, max_features="sqrt", n_jobs=-1, random_state=42)
+rf_classifier.fit(X_train, y_train)
+
+y_pred = rf_classifier.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+classification_rep = classification_report(y_test, y_pred)
+
+print(f"Accuracy: {accuracy:.2f}")
+print("\nClassification Report:\n", classification_rep)
+
+
+
+#LightGBM Model
+
+#encoder = LabelEncoder()
+
+# Fit one encoder using all possible labels
+#encoder.fit(np.concatenate([
+   # np.asarray(y_train),
+    #np.asarray(y_test)
+#]))
+
+#y_train_encoded = encoder.transform(y_train)
+#y_test_encoded = encoder.transform(y_test)
+
+#sns.countplot(x=y_train)
+#plt.title("Target Distribution")
+#plt.show()
+
+#corr=df.corr()
+
+#plt.figure(figsize=(10,6))
+#sns.heatmap(corr,cmap="coolwarm",center=0)
+#plt.title("Correlation Matrix")
+#plt.show()
+
+#train_data=lgb.Dataset(X_train,label=y_train_encoded)
+#valid_data=lgb.Dataset(X_test,label=y_test_encoded)
+
+#params = {
+ #   "objective": "multiclass",
+  #  "num_class": len(encoder.classes_),
+   # "metric": "multi_logloss",
+    #"boosting_type": "gbdt",
+    #"learning_rate": 0.05,
+    #"num_leaves": 31,
+  #  "feature_fraction": 0.8,
+    #"bagging_fraction": 0.8,
+    #"bagging_freq": 5,
+    #"min_data_in_leaf": 20,
+    #"num_threads": -1,
+    #"verbosity": -1
+#}
+
+
+#model=lgb.train(
+#params,
+#train_data,
+#num_boost_round=500,
+#valid_sets=[valid_data],
+#callbacks=[lgb.early_stopping(30), lgb.log_evaluation(0)]
+#)
+
+#y_pred_prob=model.predict(X_test,num_iteration=model.best_iteration)
+#y_pred= np.argmax(y_pred_prob, axis=1)
+
+#accuracy=accuracy_score(y_test_encoded,y_pred)
+#precision=precision_score(y_test_encoded,y_pred, average='macro', zero_division=0)
+#recall=recall_score(y_test_encoded,y_pred, average='macro',zero_division=0)
+#f1=f1_score(y_test_encoded,y_pred, average='macro', zero_division=0)
+#auc=roc_auc_score(y_test_encoded,y_pred_prob, multi_class="ovr", average="macro")
+
+#print("Accuracy:",accuracy)
+#print("Precision:",precision)
+#print("Recall:",recall)
+#print("F1 Score:",f1)
+#print("AUC:",auc)
+
+#print(classification_report(y_test_encoded,y_pred, labels=np.arrange(len(encoder.classes_)), zero_division=0))
+
+#importance=pd.DataFrame({
+#"feature":x.columns,
+#"importance":model.feature_importance()
+#}).sort_values(by="importance",ascending=False)
+
+#sns.barplot(x="importance",y="feature",data=importance.head(10))
+#plt.title("Top Features")
+#plt.show()
+
+#kf=StratifiedKFold(n_splits=5,shuffle=True,random_state=42)
+#scores=[]
+
+#for train_idx,val_idx in kf.split(x,y_encoded):
+ #   X_tr,X_val=x.iloc[train_idx],x.iloc[val_idx]
+  #  y_tr,y_val=y_encoded[train_idx], y_encoded[val_idx]
+
+   # train_set=lgb.Dataset(X_tr,label=y_tr)
+    #val_set=lgb.Dataset(X_val,label=y_val)
+
+    #cv_model=lgb.train(
+     #   params,
+      #  train_set,
+       # num_boost_round=500,
+        #valid_sets=[val_set],
+        #callbacks=[
+         #   lgb.early_stopping(30, verbose=False),
+          #  lgb.log_evaluation(0)
+        #]
+    #)
+#val_pred_prob = cv_model.predict(
+ #           X_val,
+  #          num_iteration=cv_model.best_iteration
+   #  )   
+#fold_auc = roc_auc_score(
+ #       y_val,
+  #      val_pred_prob,
+   #     multi_class="ovr",
+    #    average="macro"
+    #)
+
+#scores.append(fold_auc)
+
+#print("CV AUC:", np.mean(scores))
 #save the model
-with open ("WESADECG.pkl", "wb") as model_file:
-    pickle.dump(dt_clf_gini, model_file)
+#with open ("WESADECG.pkl", "wb") as model_file:
+ #   pickle.dump(rf_classifier, model_file)

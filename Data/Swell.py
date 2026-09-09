@@ -12,6 +12,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 #from xgboost import XGBClassifier
 import pickle
 
@@ -86,6 +87,18 @@ dt_clf_gini.fit(X_train, y_train)
 #evaluate model performance
 y_pred = dt_clf_gini.predict(X_test)
 print ("Accuracy:", accuracy_score(y_test, y_pred))
+
+#average=weighted means to combine precision values from multiple classes
+precision = precision_score(y_test, y_pred, average='weighted', zero_division=0)
+print(f"Precision: {precision}")
+print('Precision2: %.3f' % precision_score(y_test, y_pred, average='weighted', zero_division=0))
+
+recall = recall_score(y_test, y_pred, average='weighted', zero_division=0)
+print(f"Recall: {recall}")
+print('Recall2: %.3f' % recall_score(y_test, y_pred, average='weighted', zero_division=0))
+
+#F1 Score
+print('F1 Score: %.3f' % f1_score(y_test, y_pred, average='weighted', zero_division=0))
 
 #save the model
 with open ("Swell.pkl", "wb") as model_file:
