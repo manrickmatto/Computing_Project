@@ -992,7 +992,9 @@ classification_rep = classification_report(y_test, y_pred)
 print(f"Accuracy: {accuracy:.2f}")
 print("\nClassification Report:\n", classification_rep)
 
-
+#save the model
+with open ("WESADECG.pkl", "wb") as model_file:
+    pickle.dump(rf_classifier, model_file)
 
 #LightGBM Model
 
@@ -1105,6 +1107,3 @@ print("\nClassification Report:\n", classification_rep)
 #scores.append(fold_auc)
 
 #print("CV AUC:", np.mean(scores))
-#save the model
-#with open ("WESADECG.pkl", "wb") as model_file:
- #   pickle.dump(rf_classifier, model_file)

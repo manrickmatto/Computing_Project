@@ -3,7 +3,7 @@ import threading
 import serial
 import time
 
-#location of where the USB is 
+#location of where the USB is/ BAUD = transmission rate
 Port = "COM3"
 Baud_rate = 115200
 
